@@ -1,6 +1,6 @@
 import { instance as axiosInstance } from "@/lib/axiosInstance";
 
-export const getNewAccessToken = async (authKey: string) => {
+export const getNewAccessToken = async () => {
   return await axiosInstance({
     url: "http://localhost:5000/api/v1/auth/refresh-token",
     method: "POST",

@@ -43,7 +43,7 @@ instance.interceptors.response.use(
     if (error?.response?.status === 500 && !config.sent) {
       config.sent = true;
 
-      const response = await getNewAccessToken(authKey); // get new access token
+      const response = await getNewAccessToken(); // get new access token
 
       const accessToken = response?.data?.accessToken; // set in variable
 
