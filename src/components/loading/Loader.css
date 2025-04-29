@@ -1,0 +1,32 @@
+@keyframes weld-rotate {
+  0%,
+  25% {
+    transform: rotate(0deg);
+  }
+  50%,
+  75% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader {
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+
+.loader span {
+  position: absolute;
+  inset: 0;
+  border: 32px solid transparent;
+  border-top-color: white;
+  animation: weld-rotate 2s infinite ease-in;
+}
+
+.loader span:nth-child(2) {
+  border-color: transparent transparent transparent #ff3d00;
+  animation-delay: 0.5s;
+}
