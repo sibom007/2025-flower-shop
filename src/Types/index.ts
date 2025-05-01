@@ -1,5 +1,5 @@
 export type ResponseSuccessType = {
-  data: any;
+  data: never;
   meta?: IMeta;
 };
 

@@ -28,8 +28,9 @@ const useAuth = (): User => {
     return {
       isAuthenticated: true,
       role: decoded.role,
+      
     };
-  } catch (e) {
+  } catch (error) {
     return { isAuthenticated: false };
   }
 };

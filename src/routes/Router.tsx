@@ -22,7 +22,9 @@ export const router = createBrowserRouter([
     path: "/shop",
     element: (
       <RootLayout>
-        <ShopPage />
+        <ProtectRoute>
+          <ShopPage />
+        </ProtectRoute>
       </RootLayout>
     ),
   },

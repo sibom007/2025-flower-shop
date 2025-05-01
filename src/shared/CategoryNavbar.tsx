@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { categories } from "@/db/categories";
-import { useState } from "react";
 
-const CategoryNavbar = () => {
-  const [categorieBg, setCategorieBg] = useState("#FFE4B5");
-
+interface Props {
+  categorieBg: string;
+  setCategorieBg: React.Dispatch<React.SetStateAction<string>>;
+}
+const CategoryNavbar = ({ categorieBg, setCategorieBg }: Props) => {
   return (
     <div className="w-full px-2">
       <div

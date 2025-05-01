@@ -1,42 +1,42 @@
 export const categories = [
   {
     name: "Happy Moments",
-    bgColor: "#FFD700",
+    bgColor: "#FFD70099", // Gold with 60% opacity
   },
   {
     name: "Love & Romance",
-    bgColor: "#FF69B4",
+    bgColor: "#FF4F8199", // Soft romantic pink with 60% opacity
   },
   {
     name: "Birthday Specials",
-    bgColor: "#87CEEB",
+    bgColor: "#6EC6FF99", // Bright sky blue with 60% opacity
   },
   {
     name: "Congratulations",
-    bgColor: "#98FB98",
+    bgColor: "#7CFC0099", // Lawn green with 60% opacity
   },
   {
     name: "Get Well Soon",
-    bgColor: "#E6E6FA",
+    bgColor: "#C1F0F699", // Light aqua/teal with 60% opacity
   },
   {
     name: "Sympathy & Condolences",
-    bgColor: "#778899",
+    bgColor: "#A9A9A999", // Dim gray with 60% opacity
   },
   {
     name: "Thank You",
-    bgColor: "#DDA0DD",
+    bgColor: "#BA55D399", // Medium orchid with 60% opacity
   },
   {
     name: "Friendship",
-    bgColor: "#F0E68C",
+    bgColor: "#F5DEB399", // Warm khaki/tan with 60% opacity
   },
   {
     name: "New Baby",
-    bgColor: "#FFC0CB",
+    bgColor: "#FFB6C199", // Baby pink with 60% opacity
   },
   {
     name: "Anniversary Celebrations",
-    bgColor: "#B8860B",
+    bgColor: "#DAA52099", // Goldenrod with 60% opacity
   },
 ];

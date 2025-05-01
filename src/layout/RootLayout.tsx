@@ -5,7 +5,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <NavBar />
-      {children}
+      <div className="font-body">{children}</div>
       <Footer />
     </>
   );
