@@ -6,7 +6,7 @@ import {
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-const HomeFooter = () => {
+const Footer = () => {
   return (
     <section className="py-10 bg-gradient-to-r from-orange-100 via-yellow-100 to-rose-100 text-gray-800">
       <div className="container mx-auto px-4">
@@ -100,4 +100,4 @@ const HomeFooter = () => {
     </section>
   );
 };
-export default HomeFooter;
+export default Footer;

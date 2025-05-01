@@ -6,11 +6,25 @@ import { ProtectRoute } from "./ProtectRoute";
 
 import NotPermitRoute from "@/models/error/components/NotPermitRoute";
 import HomePage from "@/pages/HomePage";
+import ShopPage from "@/pages/ShopPage";
+import RootLayout from "@/layout/RootLayout";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
+    element: (
+      <RootLayout>
+        <HomePage />
+      </RootLayout>
+    ),
+  },
+  {
+    path: "/shop",
+    element: (
+      <RootLayout>
+        <ShopPage />
+      </RootLayout>
+    ),
   },
   {
     path: "/login",

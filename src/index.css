@@ -3,6 +3,16 @@
 
 @custom-variant dark (&:is(.dark *));
 
+
+.scrollbar-hide {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+
 @theme {
   --color-orangeTheme-100: oklch(0.984 0.1 37.858); /* Lightest orange */
   --color-orangeTheme-200: oklch(0.968 0.125 37.896); /* Light orange */
