@@ -7,7 +7,7 @@ import Avater from "@/models/home/components/Avater";
 import { Link, useLocation } from "react-router-dom"; // Correct imports
 import LoadingAnimation from "@/shared/LoadingAnimation";
 import { cn } from "@/lib/utils";
-import MobilNavber from "./mobilNavber";
+import MobilNavber from "./MobilNavber";
 
 const navLinks = [
   { name: "Home", icon: "🏠", link: "/" },
