@@ -1,4 +1,4 @@
-import Shop from "@/models/shop/components/Shop";
+import Shop from "@/modules/shop/components/Shop";
 
 const ShopPage = () => {
   return <Shop />;

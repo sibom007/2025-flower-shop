@@ -2,10 +2,10 @@ import axios from "axios";
 import {
   getFromLocalStorage,
   setToLocalStorage,
-} from "../models/auth/utils/localStore";
+} from "../modules/auth/utils/localStore";
 
 import { authKey } from "@/Types/authkey";
-import { getNewAccessToken } from "@/models/auth/utils/getNewAccessToken";
+import { getNewAccessToken } from "@/modules/auth/utils/getNewAccessToken";
 
 const instance = axios.create();
 instance.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;

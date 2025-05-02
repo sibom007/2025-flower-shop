@@ -1,5 +1,5 @@
 import { useEffect, ReactNode } from "react";
-import useAuth from "@/models/auth/hooks/useAuth"; // Custom hook for user authentication (adjust according to your implementation)
+import useAuth from "@/modules/auth/hooks/useAuth"; // Custom hook for user authentication (adjust according to your implementation)
 import { useNavigate } from "react-router-dom";
 
 interface SubProtectRouteProps {

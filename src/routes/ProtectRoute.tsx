@@ -1,4 +1,4 @@
-import useAuth from "@/models/auth/hooks/useAuth";
+import useAuth from "@/modules/auth/hooks/useAuth";
 import { ReactNode, useEffect, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 

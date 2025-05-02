@@ -1,13 +1,13 @@
 import CategoryNavbar from "@/shared/CategoryNavbar";
-import ShopInput from "@/models/shop/components/ShopInput";
-import ShopFlowerCard from "@/models/shop/components/ShopFlowerCard";
+import ShopInput from "@/modules/shop/components/ShopInput";
+import ShopFlowerCard from "@/modules/shop/components/ShopFlowerCard";
 import { flowers } from "@/db/flower";
 import { useState } from "react";
 import FlowersSkeleton from "@/components/FlowersSkeleton";
 
 const Shop = () => {
   const [categorieBg, setCategorieBg] = useState("#FFE4B5");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
 
   return (
     <div className="min-h-screen">

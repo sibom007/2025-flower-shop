@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { useLogout } from "@/models/auth/hooks/useLogout";
+import { useLogout } from "@/modules/auth/hooks/useLogout";
 
 const Avater = () => {
   const { mutate: Logout } = useLogout();

@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import useAuth from "@/models/auth/hooks/useAuth";
-import Avater from "@/models/home/components/Avater";
+import useAuth from "@/modules/auth/hooks/useAuth";
+import Avater from "@/modules/home/components/Avater";
 import { Link, useLocation } from "react-router-dom"; // Correct imports
 import LoadingAnimation from "@/shared/LoadingAnimation";
 import { cn } from "@/lib/utils";

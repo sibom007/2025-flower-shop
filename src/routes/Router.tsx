@@ -4,7 +4,7 @@ import SignUpPage from "@/pages/SignUpPage";
 import { createBrowserRouter } from "react-router-dom";
 import { ProtectRoute } from "./ProtectRoute";
 
-import NotPermitRoute from "@/models/error/components/NotPermitRoute";
+import NotPermitRoute from "@/modules/error/components/NotPermitRoute";
 import HomePage from "@/pages/HomePage";
 import ShopPage from "@/pages/ShopPage";
 import RootLayout from "@/layout/RootLayout";
