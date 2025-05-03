@@ -1,17 +1,20 @@
 import { Button } from "@/components/ui/button";
+import CategoriesBgContext from "@/context/CategorieBgColorContext";
 
 import { Flower } from "@/Types";
 import { motion } from "framer-motion";
+import { useContext } from "react";
 
 interface Props {
   flower: Flower;
-  categoriesBg: string;
 }
 
-const ShopFlowerCard = ({ flower, categoriesBg }: Props) => {
+const ShopFlowerCard = ({ flower }: Props) => {
+  const { categoriesBg } = useContext(CategoriesBgContext);
+
   return (
     <motion.div
-      className="bg-white rounded-lg shadow-md p-4 w-full h-full flex flex-col"
+      className="bg-white rounded-lg shadow-md p-4 w-full h-full flex flex-col "
       style={{ backgroundColor: categoriesBg }}
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
