@@ -105,20 +105,40 @@ const Login = () => {
               )}
             </span>
           </div>
-
-          <motion.button
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{
-              delay: 0.6,
-              type: "spring",
-              stiffness: 300,
-              damping: 20,
-            }}
-            type="submit"
-            className="w-full bg-orangeTheme-500 hover:bg-orangeTheme-600 text-white font-semibold py-2 rounded-md transition">
-            Login
-          </motion.button>
+          <div className="grid grid-cols-2 gap-4">
+            <motion.button
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                delay: 0.6,
+                type: "spring",
+                stiffness: 300,
+                damping: 20,
+              }}
+              type="submit"
+              className="w-full bg-orangeTheme-500 hover:bg-orangeTheme-600 text-white font-semibold py-2 rounded-md transition">
+              Login
+            </motion.button>
+            <motion.button
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                delay: 0.6,
+                type: "spring",
+                stiffness: 300,
+                damping: 20,
+              }}
+              type="button"
+              onClick={() =>
+                mutate({
+                  email: "Sibomsaha77@gmail.com",
+                  password: "123456789",
+                })
+              }
+              className="w-full bg-orangeTheme-500 hover:bg-orangeTheme-600 text-white font-semibold py-2 rounded-md transition">
+              Get Account as Admin
+            </motion.button>
+          </div>
         </motion.form>
         <div className="text-center mt-4">
           <p className="text-orangeTheme-700 inline">Don't have an account? </p>

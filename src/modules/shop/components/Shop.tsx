@@ -32,6 +32,7 @@ const Shop = () => {
     selectedType,
   });
 
+
   return (
     <div className="min-h-screen">
       <div className="p-4">
