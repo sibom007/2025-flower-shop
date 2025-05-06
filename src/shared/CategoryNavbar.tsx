@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { categories } from "@/db/categories";
+import { categories } from "@/modules/shop/FlowerConstant";
+
 
 interface Props {
   categorieBg: string;

@@ -1,6 +1,7 @@
 import { flowers } from "@/db/flower";
 import TopSellingFlowerCard from "./TopSellingFlowerCard";
 import { motion } from "framer-motion";
+import { FlowerCategory, FlowerType } from "@/Types/Flower.type";
 
 const TopSellingFlowers = () => {
   return (
@@ -36,7 +37,13 @@ const TopSellingFlowers = () => {
                 visible: { opacity: 1, y: 0 },
               }}
               transition={{ duration: 0.5 }}>
-              <TopSellingFlowerCard flower={flower} />
+              <TopSellingFlowerCard
+                flower={{
+                  ...flower,
+                  category: flower.category as FlowerCategory,
+                  FlowerType: flower.FlowerType as FlowerType, // Cast FlowerType to the correct type
+                }}
+              />
             </motion.div>
           ))}
         </motion.div>

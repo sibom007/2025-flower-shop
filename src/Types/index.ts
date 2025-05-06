@@ -19,16 +19,3 @@ export type IMeta = {
   limit: number;
   total: number;
 };
-
-export type Flower = {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
-  description: string;
-  color: string;
-  category: string;
-  FlowerType: string;
-  stock: number;
-  discount?: number;
-};

@@ -20,6 +20,9 @@ export const useLogin = () => {
       if (data.status === 400) {
         toast.error(data.data.message);
       }
+      if (data.status === 401) {
+        toast.error(data.data.message);
+      }
       if (data.status === 200) {
         toast.success(data.data.message);
         navigate("/", { replace: true });

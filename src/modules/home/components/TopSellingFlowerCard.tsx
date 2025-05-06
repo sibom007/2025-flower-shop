@@ -1,7 +1,7 @@
-import { Flower } from "@/Types";
+import { IFlower } from "@/Types/Flower.type";
 
 // components/FlowerCard.js
-const TopSellingFlowerCard = ({ flower }: { flower: Flower }) => {
+const TopSellingFlowerCard = ({ flower }: { flower: IFlower }) => {
   return (
     <div className="relative overflow-hidden group rounded-lg shadow-lg hover:scale-105 transition-transform duration-500">
       <img

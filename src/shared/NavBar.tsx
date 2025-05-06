@@ -21,7 +21,7 @@ const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Show loading animation initially
   const location = useLocation(); // Get current location
-  const MotionLink = motion(Link);
+  const MotionLink = motion.create(Link);
 
   useEffect(() => {
     // Show loading immediately on route change

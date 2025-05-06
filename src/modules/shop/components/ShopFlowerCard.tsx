@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import CategoriesBgContext from "@/context/CategorieBgColorContext";
+import { IFlower } from "@/Types/Flower.type";
 
-import { Flower } from "@/Types";
 import { motion } from "framer-motion";
 import { useContext } from "react";
 
 interface Props {
-  flower: Flower;
+  flower: IFlower;
 }
 
 const ShopFlowerCard = ({ flower }: Props) => {

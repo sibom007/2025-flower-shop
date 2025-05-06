@@ -1,14 +1,15 @@
 import axios from "axios";
 import {
   getFromLocalStorage,
-  setToLocalStorage,
+  // setToLocalStorage,
 } from "../modules/auth/utils/localStore";
 
 import { authKey } from "@/Types/authkey";
-import { getNewAccessToken } from "@/modules/auth/utils/getNewAccessToken";
+// import { getNewAccessToken } from "@/modules/auth/utils/getNewAccessToken";
 
 const instance = axios.create();
 instance.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
+
 instance.defaults.headers.post["Content-Type"] = "application/json";
 instance.defaults.headers["Accept"] = "application/json";
 instance.defaults.timeout = 60000;
@@ -16,7 +17,6 @@ instance.defaults.timeout = 60000;
 instance.interceptors.request.use(
   function (config) {
     const accessToken = getFromLocalStorage(authKey);
-
     if (accessToken) {
       config.headers.Authorization = accessToken;
     }
@@ -43,13 +43,13 @@ instance.interceptors.response.use(
     if (error?.response?.status === 500 && !config.sent) {
       config.sent = true;
 
-      const response = await getNewAccessToken(); // get new access token
+      // const response = await getNewAccessToken(); // get new access token
 
-      const accessToken = response?.data?.accessToken; // set in variable
+      // const accessToken = response?.data?.accessToken; // set in variable
 
-      config.headers["Authorization"] = accessToken; // set in header
+      // config.headers["Authorization"] = accessToken; // set in header
 
-      setToLocalStorage(authKey, accessToken); // and set in local storage
+      // setToLocalStorage(authKey, accessToken); // and set in local storage
 
       return instance(config);
     } else {
