@@ -8,7 +8,7 @@ import { authKey } from "@/Types/authkey";
 // import { getNewAccessToken } from "@/modules/auth/utils/getNewAccessToken";
 
 const instance = axios.create();
-instance.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
+instance.defaults.baseURL = import.meta.env.BACKEND_URL;
 
 instance.defaults.headers.post["Content-Type"] = "application/json";
 instance.defaults.headers["Accept"] = "application/json";
