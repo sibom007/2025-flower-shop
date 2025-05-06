@@ -17,7 +17,11 @@ const Shop = () => {
     selectedSort,
     selectedType,
   } = useFilter();
-  const { data: flowers, isLoading } = useGetFlower({
+  const {
+    data: flowers,
+    isLoading,
+    error,
+  } = useGetFlower({
     minPrice,
     maxPrice,
     searchInput,
@@ -34,17 +38,21 @@ const Shop = () => {
         <ShopFilter />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-4">
           {isLoading ? (
-            // show 6 skeleton cards while loading
             Array.from({ length: 6 }).map((_, index) => (
               <FlowerCardSkeleton key={index} />
             ))
+          ) : error ? (
+            <NotContant
+              title="Error Occurred"
+              description="Sorry, something went wrong while fetching the flowers. Please try again later."
+            />
           ) : flowers?.length === 0 ? (
             <NotContant
               title="No Flowers Found"
               description="We're sorry, but we couldn't find any flowers matching your search criteria."
             />
           ) : (
-            flowers.map((flower: IFlower, idx: number) => (
+            flowers?.map((flower: IFlower, idx: number) => (
               <ShopFlowerCard key={idx} flower={flower} />
             ))
           )}
