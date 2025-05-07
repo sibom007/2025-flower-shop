@@ -1,4 +1,5 @@
-import useAuth from "@/modules/auth/hooks/useAuth";
+
+import useDecodedAuth from "@/modules/auth/hooks/useDecodedAuth";
 import { ReactNode, useEffect, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -21,7 +22,7 @@ export const ProtectRoute = ({
   role,
   redirect = "/",
 }: ProtectRouteProps) => {
-  const { isAuthenticated, role: userRole } = useAuth();
+  const { isAuthenticated, role: userRole } = useDecodedAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const publicRoutes = useMemo(() => ["/login", "/signup"], []);

@@ -4,18 +4,21 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { CategoriesBgProvider } from "@/context/CategorieBgColorContext";
 import { FilterProvider } from "@/context/FilterContext";
+import { AuthProvider } from "@/context/AuthContext";
 
 const Provider = ({ children }: { children: React.ReactNode }) => {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
       <NuqsAdapter fullPageNavigationOnShallowFalseUpdates>
-        <CategoriesBgProvider>
-          <FilterProvider>
-            {children}
-            <Toaster duration={2000} position="top-right" />
-          </FilterProvider>
-        </CategoriesBgProvider>
+        <AuthProvider>
+          <CategoriesBgProvider>
+            <FilterProvider>
+              {children}
+              <Toaster duration={2000} position="top-right" />
+            </FilterProvider>
+          </CategoriesBgProvider>
+        </AuthProvider>
       </NuqsAdapter>
     </QueryClientProvider>
   );

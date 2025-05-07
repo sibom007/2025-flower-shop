@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 
-import { useFilter } from "@/context/FilterContext";
+
 import { useForm } from "react-hook-form";
 import { FlowerCategory, FlowerType } from "@/Types/Flower.type";
 import {
@@ -13,6 +13,7 @@ import {
   flowerRating,
   flowerTypes,
 } from "../FlowerConstant";
+import { useFilter } from "../hooks/useFilter";
 
 type FilterFormValues = {
   minPrice: string;

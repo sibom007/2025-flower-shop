@@ -1,6 +1,6 @@
 import * as React from "react";
-import { cn } from "@/lib/utils";
 
+import { cn } from "@/lib/utils";
 // Define variants as a mapping
 const variantStyles = {
   primary:
@@ -21,11 +21,7 @@ function Input({
     <input
       type={type}
       data-slot="input"
-      className={cn(
-        "w-full p-2 rounded-md focus:outline-none",
-        variantStyles[variant], // Apply variant-specific styles
-        className // Combine with any additional passed className
-      )}
+      className={cn(className, variantStyles[variant])}
       {...props}
     />
   );

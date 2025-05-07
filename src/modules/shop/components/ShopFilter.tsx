@@ -12,7 +12,8 @@ import ShopFilterForm from "./ShopFilterForm";
 import { Button } from "@/components/ui/button";
 import { CiFilter } from "react-icons/ci";
 import { useEffect, useState } from "react";
-import { useFilter } from "@/context/FilterContext";
+import { useFilter } from "../hooks/useFilter";
+
 
 // Responsive utility
 const DESKTOP_BREAKPOINT = 768;

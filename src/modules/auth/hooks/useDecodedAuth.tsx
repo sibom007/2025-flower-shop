@@ -4,14 +4,16 @@ import { jwtDecode } from "jwt-decode";
 interface DecodedToken {
   role?: Role;
   exp?: number;
+  id?: string;
 }
 
-interface User {
+interface DecodedPayload {
   isAuthenticated: boolean;
   role?: Role;
+  id?: string;
 }
 
-const useAuth = (): User => {
+const useDecodedAuth = (): DecodedPayload => {
   const token: string | null = localStorage.getItem("accessToken");
   if (!token) {
     return { isAuthenticated: false };
@@ -28,11 +30,12 @@ const useAuth = (): User => {
     return {
       isAuthenticated: true,
       role: decoded.role,
-      
+      id: decoded.id,
     };
   } catch (error) {
+    console.error("Token decoding failed:", error);
     return { isAuthenticated: false };
   }
 };
 
-export default useAuth;
+export default useDecodedAuth;

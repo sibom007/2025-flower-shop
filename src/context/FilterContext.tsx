@@ -1,8 +1,8 @@
 
 import { useQueryState, parseAsString } from "nuqs";
-import { createContext, useContext, ReactNode } from "react";
+import { createContext, ReactNode } from "react";
 
-interface FilterContextType {
+export interface FilterContextType {
   searchInput: string | null;
   setSearchInput: (value: string | null) => void;
 
@@ -32,7 +32,9 @@ interface FilterContextType {
 // Context
 // ----------------------
 
-const FilterContext = createContext<FilterContextType | undefined>(undefined);
+export const FilterContext = createContext<FilterContextType | undefined>(
+  undefined
+);
 
 // ----------------------
 // Provider
@@ -108,10 +110,3 @@ export const FilterProvider = ({ children }: { children: ReactNode }) => {
 // Hook
 // ----------------------
 
-export const useFilter = (): FilterContextType => {
-  const context = useContext(FilterContext);
-  if (!context) {
-    throw new Error("useFilter must be used within a FilterProvider");
-  }
-  return context;
-};

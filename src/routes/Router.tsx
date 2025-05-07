@@ -8,6 +8,8 @@ import NotPermitRoute from "@/modules/error/components/NotPermitRoute";
 import HomePage from "@/pages/HomePage";
 import ShopPage from "@/pages/ShopPage";
 import RootLayout from "@/layout/RootLayout";
+import Dashboard from "@/pages/Dashboard";
+import DashboardLayout from "@/layout/DashboardLayout";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +27,24 @@ export const router = createBrowserRouter([
         <ShopPage />
       </RootLayout>
     ),
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <ProtectRoute>
+        <DashboardLayout />
+      </ProtectRoute>
+    ),
+    children: [
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "/dashboard/status",
+        element: <NotPermitRoute />,
+      },
+    ],
   },
   {
     path: "/login",

@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import useAuth from "@/modules/auth/hooks/useAuth";
+
 import Avater from "@/modules/home/components/Avater";
 import { Link, useLocation } from "react-router-dom"; // Correct imports
 import LoadingAnimation from "@/shared/LoadingAnimation";
 import { cn } from "@/lib/utils";
 import MobilNavber from "./MobilNavber";
+import useDecodedAuth from "@/modules/auth/hooks/useDecodedAuth";
 
 const navLinks = [
   { name: "Home", icon: "🏠", link: "/" },
@@ -17,7 +18,7 @@ const navLinks = [
 ];
 
 const NavBar = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useDecodedAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Show loading animation initially
   const location = useLocation(); // Get current location
@@ -70,7 +71,12 @@ const NavBar = () => {
               </MotionLink>
             ))}
             {isAuthenticated ? (
-              <Avater />
+              <div className="flex items-center gap-3">
+                <Avater />
+                <Link to={"/dashboard"}>
+                  <Button variant="primary">Dashboard</Button>
+                </Link>
+              </div>
             ) : (
               <Link to="/login">
                 <motion.button

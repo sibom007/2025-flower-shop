@@ -9,9 +9,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+
 import { useLogout } from "@/modules/auth/hooks/useLogout";
+import { useAuth } from "@/context/AuthContext";
 
 const Avater = () => {
+  const { user } = useAuth();
+
   const { mutate: Logout } = useLogout();
 
   return (
@@ -19,7 +23,7 @@ const Avater = () => {
       <DropdownMenuTrigger asChild>
         <Avatar>
           <AvatarImage
-            src="https://github.com/shadcn.png"
+            src={user?.image || "https://github.com/shadcn.png"}
             className="w-9 h-9 rounded-2xl ring-2 ring-orangeTheme-500"
           />
           <AvatarFallback className="bg-orangeTheme-500 text-white">

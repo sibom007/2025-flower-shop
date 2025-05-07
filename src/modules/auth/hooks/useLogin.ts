@@ -1,11 +1,11 @@
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
-import { LoginCredentials } from "../Types";
-import { instance as axiosInstance } from "@/lib/axiosInstance";
-import { toast } from "sonner";
-import { setToLocalStorage } from "../utils/localStore";
 import { authKey } from "@/Types/authkey";
-import { useNavigate } from "react-router-dom";
+import { LoginCredentials } from "../Types";
+import { setToLocalStorage } from "../utils/localStore";
+import { instance as axiosInstance } from "@/lib/axiosInstance";
 
 export const useLogin = () => {
   const navigate = useNavigate();
@@ -24,11 +24,11 @@ export const useLogin = () => {
         toast.error(data.data.message);
       }
       if (data.status === 200) {
+        if (data.data.data.accessToken) {
+          setToLocalStorage(authKey, data.data.data.accessToken);
+        }
         toast.success(data.data.message);
         navigate("/", { replace: true });
-      }
-      if (data.data.data.accessToken) {
-        setToLocalStorage(authKey, data.data.data.accessToken);
       }
     },
   });
