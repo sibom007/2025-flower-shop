@@ -6,30 +6,45 @@ import { authKey } from "@/Types/authkey";
 import { LoginCredentials } from "../Types";
 import { setToLocalStorage } from "../utils/localStore";
 import { instance as axiosInstance } from "@/lib/axiosInstance";
+import { getUserByToken } from "./useGetUserFromToken";
+import { useAuth } from "@/context/AuthContext";
 
 export const useLogin = () => {
+  const { setUser } = useAuth();
   const navigate = useNavigate();
 
   return useMutation({
     mutationFn: async (credentials: LoginCredentials) => {
-      return await axiosInstance.post(`/auth/login`, credentials, {
+      const response = await axiosInstance.post("/auth/login", credentials, {
         withCredentials: true,
       });
+
+      return response.data?.data;
     },
-    onSuccess: (data) => {
-      if (data.status === 400) {
-        toast.error(data.data.message);
+
+    onSuccess: async (data) => {
+      const accessToken = data?.accessToken;
+      if (!accessToken) {
+        toast.error("Login failed. No access token received.");
+        return;
       }
-      if (data.status === 401) {
-        toast.error(data.data.message);
-      }
-      if (data.status === 200) {
-        if (data.data.data.accessToken) {
-          setToLocalStorage(authKey, data.data.data.accessToken);
-        }
-        toast.success(data.data.message);
+
+      try {
+        const user = await getUserByToken(accessToken);
+        setUser(user);
+        setToLocalStorage(authKey, accessToken);
+
+        toast.success(data.message || "Login successful!");
         navigate("/", { replace: true });
+      } catch (error) {
+        console.error("Failed to fetch user after login:", error);
+        toast.error("Login succeeded, but failed to load user data.");
       }
+    },
+
+    onError: () => {
+      const message = "Something went wrong during login. Please try again.";
+      toast.error(message);
     },
   });
 };

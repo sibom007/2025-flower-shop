@@ -4,8 +4,10 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { removeFromLocalStorage } from "../utils/localStore";
 import { authKey } from "@/Types/authkey";
+import { useAuth } from "@/context/AuthContext";
 
 export const useLogout = () => {
+  const { setUser } = useAuth();
   const navigate = useNavigate();
 
   return useMutation({
@@ -22,6 +24,7 @@ export const useLogout = () => {
       if (data.status === 200) {
         toast.success("Logout successful");
         removeFromLocalStorage(authKey);
+        setUser(null);
         navigate("/login", { replace: true });
       } else {
         toast.error("Logout failed");
