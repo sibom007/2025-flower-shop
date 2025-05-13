@@ -1,5 +1,6 @@
+import { useUser } from "@/modules/auth/hooks/useUser";
 import { User } from "@/modules/auth/Types";
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 
 interface UserContextType {
   user: User | null;
@@ -12,7 +13,14 @@ const AuthContext = createContext<UserContextType>({
 });
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const { data } = useUser();
   const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    if (data) {
+      setUser(data);
+    }
+  }, [data]);
 
   return (
     <AuthContext.Provider

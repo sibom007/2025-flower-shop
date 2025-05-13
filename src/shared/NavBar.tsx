@@ -17,7 +17,7 @@ const navLinks = [
   { name: "Contact", icon: "📞", link: "/contact" },
 ];
 
-const NavBar = () => {
+const NavBar = ({ children }: { children?: React.ReactNode }) => {
   const { isAuthenticated } = useDecodedAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Show loading animation initially
@@ -46,12 +46,15 @@ const NavBar = () => {
         className="w-full px-4 py-3 border-b border-orangeTheme-300 bg-orangeTheme-100 text-orangeTheme-900 shadow-sm relative z-50">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Brand */}
-          <motion.h1
-            className="text-2xl font-bold text-orangeTheme-700"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}>
-            FlowerShop
-          </motion.h1>
+          <div className="flex items-center gap-2">
+            {children}
+            <motion.h1
+              className="text-2xl font-bold text-orangeTheme-700"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}>
+              FlowerShop
+            </motion.h1>
+          </div>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-6">
@@ -73,9 +76,6 @@ const NavBar = () => {
             {isAuthenticated ? (
               <div className="flex items-center gap-3">
                 <Avater />
-                <Link to={"/dashboard"}>
-                  <Button variant="primary">Dashboard</Button>
-                </Link>
               </div>
             ) : (
               <Link to="/login">

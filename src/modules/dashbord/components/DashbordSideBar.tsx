@@ -46,7 +46,7 @@ const items = [
     title: "user Status",
     url: "/dashboard/status",
     icon: FaUserSlash,
-    role: Role.ADMIN,
+    role: Role.ADMIN || Role.MANAGER,
   },
 ];
 
@@ -72,7 +72,7 @@ export function DashbordSideBar() {
                   <SidebarMenuButton
                     className={cn(
                       pathName === item.url &&
-                        "bg-orangeTheme-600 text-orangeTheme-100 ",
+                        "bg-orangeTheme-600 text-orangeTheme-100",
                       "hover:bg-orangeTheme-600 hover:text-orangeTheme-100"
                     )}
                     asChild>
@@ -85,11 +85,13 @@ export function DashbordSideBar() {
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
+
           <Separator className="my-4 bg-orangeTheme-200" />
+
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => {
-                if (user?.role !== item.role) return null; // Check if the user has the required role
+                if (item.role && !user?.role.includes(item.role)) return null;
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton

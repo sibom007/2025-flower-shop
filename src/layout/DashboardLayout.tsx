@@ -1,15 +1,23 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { DashbordSideBar } from "@/modules/dashbord/components/DashbordSideBar";
+import NavBar from "@/shared/NavBar";
 import { Outlet } from "react-router-dom";
 
 const DashboardLayout = () => {
   return (
-    <main>
+    <main className="flex min-h-screen">
       <SidebarProvider>
-        <div className="flex">
-          <DashbordSideBar />
-          <div className="flex-1">
-            <SidebarTrigger />
+        <DashbordSideBar />
+
+        <div className="flex-1">
+          <nav className="flex items-center ">
+            <div className="w-full">
+              <NavBar>
+                <SidebarTrigger />
+              </NavBar>
+            </div>
+          </nav>
+          <div className="p-4">
             <Outlet />
           </div>
         </div>
@@ -17,5 +25,4 @@ const DashboardLayout = () => {
     </main>
   );
 };
-
 export default DashboardLayout;

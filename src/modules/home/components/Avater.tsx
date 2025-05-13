@@ -12,8 +12,26 @@ import {
 
 import { useLogout } from "@/modules/auth/hooks/useLogout";
 import { useAuth } from "@/context/AuthContext";
+import { Link, useLocation } from "react-router-dom";
+import { cn } from "@/lib/utils";
+
+const items = [
+  {
+    label: "Dashboard",
+    href: "/dashboard",
+  },
+  {
+    label: "Billing",
+    href: "/",
+  },
+  {
+    label: "Settings",
+    href: "/",
+  },
+];
 
 const Avater = () => {
+  const pathname = useLocation().pathname;
   const { user } = useAuth();
 
   const { mutate: Logout } = useLogout();
@@ -36,17 +54,21 @@ const Avater = () => {
           My Account
         </DropdownMenuLabel>
         <DropdownMenuSeparator className="bg-orangeTheme-300" />
+
         <DropdownMenuGroup>
-          <DropdownMenuItem className="hover:bg-orangeTheme-200">
-            Profile
-          </DropdownMenuItem>
-          <DropdownMenuItem className="hover:bg-orangeTheme-200">
-            Billing
-          </DropdownMenuItem>
-          <DropdownMenuItem className="hover:bg-orangeTheme-200">
-            Settings
-          </DropdownMenuItem>
+          {items.map((item) => (
+            <Link to={item.href} key={item.label}>
+              <DropdownMenuItem
+                className={cn(
+                  "hover:bg-orangeTheme-400",
+                  pathname === item.href && "bg-orangeTheme-400 my-1"
+                )}>
+                {item.label}
+              </DropdownMenuItem>
+            </Link>
+          ))}
         </DropdownMenuGroup>
+
         <DropdownMenuSeparator className="bg-orangeTheme-300" />
         <DropdownMenuItem
           className="hover:bg-orangeTheme-200 text-orangeTheme-700"
