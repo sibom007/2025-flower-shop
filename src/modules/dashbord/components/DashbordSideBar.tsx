@@ -1,5 +1,6 @@
 import { Calendar, Home, Settings, ShoppingBagIcon } from "lucide-react";
 import { FaUserSlash } from "react-icons/fa";
+import { PiFlowerBold } from "react-icons/pi";
 
 import {
   Sidebar,
@@ -46,6 +47,12 @@ const items = [
     title: "user Status",
     url: "/dashboard/status",
     icon: FaUserSlash,
+    role: Role.ADMIN || Role.MANAGER,
+  },
+  {
+    title: "Create Flower",
+    url: "/dashboard/create-flower",
+    icon: PiFlowerBold,
     role: Role.ADMIN || Role.MANAGER,
   },
 ];

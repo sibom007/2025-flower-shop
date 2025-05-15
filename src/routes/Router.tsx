@@ -10,7 +10,9 @@ import ShopPage from "@/pages/ShopPage";
 import RootLayout from "@/layout/RootLayout";
 import Dashboard from "@/pages/Dashboard";
 import DashboardLayout from "@/layout/DashboardLayout";
-import UserStatus from "@/modules/dashbord/Admin/components/UserStatus";
+
+import UserStatusPage from "@/pages/adminPage/UserStatusPage";
+import CreateFlowerPage from "@/pages/CreateFlowerPage";
 
 export const router = createBrowserRouter([
   {
@@ -46,7 +48,15 @@ export const router = createBrowserRouter([
         path: "/dashboard/status",
         element: (
           <ProtectRoute role={Role.ADMIN || Role.MANAGER}>
-            <UserStatus />,
+            <UserStatusPage />
+          </ProtectRoute>
+        ),
+      },
+      {
+        path: "/dashboard/create-flower",
+        element: (
+          <ProtectRoute role={Role.ADMIN || Role.MANAGER}>
+            <CreateFlowerPage />
           </ProtectRoute>
         ),
       },

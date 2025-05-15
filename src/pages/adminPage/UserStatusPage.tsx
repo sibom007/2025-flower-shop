@@ -1,3 +1,4 @@
+import Header from "@/components/Header";
 import {
   Table,
   TableBody,
@@ -7,18 +8,19 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useGetUsers } from "../hooks/useGetUsers";
-import UserStatusForm from "./UserStatusForm";
+
 import { useAuth } from "@/context/AuthContext";
+import UserStatusForm from "@/modules/dashbord/Admin/components/UserStatusForm";
+import { useGetUsers } from "@/modules/dashbord/Admin/hooks/useGetUsers";
 
-function UserStatus() {
+function UserStatusPage() {
   const { user } = useAuth();
-
   const { data } = useGetUsers();
   const Existuser = data?.filter((data) => data.id !== user?.id);
 
   return (
-    <div className="w-full  p-4">
+    <div className="w-full p-4">
+      <Header title="User Status" />
       <Table>
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
@@ -52,4 +54,4 @@ function UserStatus() {
   );
 }
 
-export default UserStatus;
+export default UserStatusPage;

@@ -5,10 +5,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Loader from "@/components/loading/Loader";
+
 import { UserRole, UserStatus } from "@/modules/auth/AuthConstant";
+
 import { useUpdateStatus } from "../hooks/useUpdateStatus";
 import { useUpdateRole } from "../hooks/useUpdateRole";
-import Loader from "@/components/loading/Loader";
+
 
 function UserStatusForm({
   id,
