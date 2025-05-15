@@ -26,3 +26,16 @@ export const FlowerformSchema = z.object({
     .optional()
     .or(z.literal("")),
 });
+
+
+export const UpdateFlowerSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  price: z.number().positive("Price must be greater than 0"),
+  description: z.string().min(1, "Description is required"),
+  color: z.string(),
+  category: z.nativeEnum(FlowerCategory),
+  FlowerType: z.nativeEnum(FlowerType),
+  stock: z.number().int().nonnegative("Stock must be 0 or more"),
+  discount: z.number().min(0).max(100).optional(),
+  isAvailable: z.boolean(),
+});

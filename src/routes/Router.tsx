@@ -13,7 +13,7 @@ import DashboardLayout from "@/layout/DashboardLayout";
 
 import UserStatusPage from "@/pages/adminPage/UserStatusPage";
 import CreateFlowerPage from "@/pages/CreateFlowerPage";
-import DeleteFlowerPage from "@/pages/DeleteFlowerPage";
+import FlowerActionsPage from "@/pages/FlowerActionsPage";
 
 export const router = createBrowserRouter([
   {
@@ -62,10 +62,10 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/delete-flower",
+        path: "/dashboard/flower-actions",
         element: (
           <ProtectRoute role={Role.ADMIN || Role.MANAGER}>
-            <DeleteFlowerPage />
+            <FlowerActionsPage />
           </ProtectRoute>
         ),
       },
