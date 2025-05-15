@@ -1,8 +1,9 @@
-import { Calendar, Home, Settings, ShoppingBagIcon } from "lucide-react";
+import { Settings } from "lucide-react";
 import { FaUserSlash } from "react-icons/fa";
 import { PiFlowerBold } from "react-icons/pi";
-
-import { MdPendingActions } from "react-icons/md";
+import { RiProfileLine } from "react-icons/ri";
+import { MdPendingActions, MdOutlinePayments } from "react-icons/md";
+import { LuBriefcase } from "react-icons/lu";
 
 import {
   Sidebar,
@@ -17,25 +18,25 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
-import { Role } from "@/routes/ProtectRoute";
 import { cn } from "@/lib/utils";
+import { UserRole } from "@/Types/User.types";
 
 // Menu items.
 const Useritems = [
   {
-    title: "Home",
-    url: "/",
-    icon: Home,
+    title: "Profile",
+    url: "/dashboard/profile",
+    icon: RiProfileLine,
   },
   {
-    title: "Shop",
-    url: "/shop",
-    icon: ShoppingBagIcon,
+    title: "Ordera",
+    url: "/dashboard/orders",
+    icon: LuBriefcase,
   },
   {
-    title: "About",
-    url: "#",
-    icon: Calendar,
+    title: "Payments",
+    url: "/dashboard/payments",
+    icon: MdOutlinePayments,
   },
   {
     title: "Settings",
@@ -49,19 +50,19 @@ const items = [
     title: "user Status",
     url: "/dashboard/status",
     icon: FaUserSlash,
-    role: Role.ADMIN || Role.MANAGER,
+    roles: [UserRole.ADMIN, UserRole.MANAGER],
   },
   {
     title: "Create Flower",
     url: "/dashboard/create-flower",
     icon: PiFlowerBold,
-    role: Role.ADMIN || Role.MANAGER,
+    roles: [UserRole.ADMIN, UserRole.MANAGER],
   },
   {
     title: "Flower Actions",
     url: "/dashboard/flower-actions",
     icon: MdPendingActions,
-    role: Role.ADMIN || Role.MANAGER,
+    roles: [UserRole.ADMIN, UserRole.MANAGER],
   },
 ];
 
@@ -106,7 +107,11 @@ export function DashbordSideBar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => {
-                if (item.role && !user?.role.includes(item.role)) return null;
+                if (
+                  item.roles &&
+                  (!user?.role || !item.roles.includes(user.role as UserRole))
+                )
+                  return null;
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton

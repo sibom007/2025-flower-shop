@@ -1,15 +1,15 @@
-import { Role } from "@/routes/ProtectRoute";
+import { UserRole } from "@/Types/User.types";
 import { jwtDecode } from "jwt-decode";
 
 interface DecodedToken {
-  role?: Role;
+  role?: UserRole;
   exp?: number;
   id?: string;
 }
 
 interface DecodedPayload {
   isAuthenticated: boolean;
-  role?: Role;
+  role?: UserRole;
   id?: string;
 }
 

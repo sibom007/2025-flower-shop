@@ -2,7 +2,7 @@ import LoginPage from "@/pages/LoginPage";
 import NotFoundPage from "@/pages/NotFoundPage";
 import SignUpPage from "@/pages/SignUpPage";
 import { createBrowserRouter } from "react-router-dom";
-import { ProtectRoute, Role } from "./ProtectRoute";
+import { ProtectRoute } from "./ProtectRoute";
 
 import NotPermitRoute from "@/modules/error/components/NotPermitRoute";
 import HomePage from "@/pages/HomePage";
@@ -14,6 +14,10 @@ import DashboardLayout from "@/layout/DashboardLayout";
 import UserStatusPage from "@/pages/adminPage/UserStatusPage";
 import CreateFlowerPage from "@/pages/CreateFlowerPage";
 import FlowerActionsPage from "@/pages/FlowerActionsPage";
+import { UserRole } from "@/Types/User.types";
+import ProfilePage from "@/pages/ProfilePage";
+import PaymentPage from "@/pages/PaymentPage";
+import OrdersPage from "@/pages/OrdersPage";
 
 export const router = createBrowserRouter([
   {
@@ -44,11 +48,23 @@ export const router = createBrowserRouter([
         path: "/dashboard",
         element: <Dashboard />,
       },
+      {
+        path: "/dashboard/profile",
+        element: <ProfilePage />,
+      },
+      {
+        path: "/dashboard/orders",
+        element: <OrdersPage />,
+      },
+      {
+        path: "/dashboard/payments",
+        element: <PaymentPage />,
+      },
 
       {
         path: "/dashboard/status",
         element: (
-          <ProtectRoute role={Role.ADMIN || Role.MANAGER}>
+          <ProtectRoute roles={[UserRole.ADMIN, UserRole.MANAGER]}>
             <UserStatusPage />
           </ProtectRoute>
         ),
@@ -56,7 +72,7 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/create-flower",
         element: (
-          <ProtectRoute role={Role.ADMIN || Role.MANAGER}>
+          <ProtectRoute roles={[UserRole.ADMIN, UserRole.MANAGER]}>
             <CreateFlowerPage />
           </ProtectRoute>
         ),
@@ -64,7 +80,7 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/flower-actions",
         element: (
-          <ProtectRoute role={Role.ADMIN || Role.MANAGER}>
+          <ProtectRoute roles={[UserRole.ADMIN, UserRole.MANAGER]}>
             <FlowerActionsPage />
           </ProtectRoute>
         ),

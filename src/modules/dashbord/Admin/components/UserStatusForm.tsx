@@ -7,11 +7,12 @@ import {
 } from "@/components/ui/select";
 import Loader from "@/components/loading/Loader";
 
-import { UserRole, UserStatus } from "@/modules/auth/AuthConstant";
+import { userRole, UserStatus } from "@/modules/auth/AuthConstant";
 
 import { useUpdateStatus } from "../hooks/useUpdateStatus";
 import { useUpdateRole } from "../hooks/useUpdateRole";
-
+import { UserRole } from "@/Types/User.types";
+import { useAuth } from "@/context/AuthContext";
 
 function UserStatusForm({
   id,
@@ -22,6 +23,7 @@ function UserStatusForm({
   Role: string;
   Status: string;
 }) {
+  const { user } = useAuth();
   const { mutate: statusMutate, isPending: statusPending } = useUpdateStatus();
   const { mutate: roleMutate, isPending: rolePending } = useUpdateRole();
 
@@ -51,21 +53,23 @@ function UserStatusForm({
           ))}
         </SelectContent>
       </Select>
-      <Select
-        defaultValue={Role}
-        onValueChange={handleRoleChange}
-        disabled={statusPending || rolePending}>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="User Role" />
-        </SelectTrigger>
-        <SelectContent>
-          {UserRole.map((Ro, i) => (
-            <SelectItem key={i} value={Ro}>
-              {Ro}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      {user?.role === UserRole.ADMIN && (
+        <Select
+          defaultValue={Role}
+          onValueChange={handleRoleChange}
+          disabled={statusPending || rolePending}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="User Role" />
+          </SelectTrigger>
+          <SelectContent>
+            {userRole.map((Ro, i) => (
+              <SelectItem key={i} value={Ro}>
+                {Ro}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      )}
     </div>
   );
 }
