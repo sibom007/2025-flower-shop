@@ -1,6 +1,7 @@
 import { Calendar, Home, Settings, ShoppingBagIcon } from "lucide-react";
 import { FaUserSlash } from "react-icons/fa";
 import { PiFlowerBold } from "react-icons/pi";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 import {
   Sidebar,
@@ -53,6 +54,12 @@ const items = [
     title: "Create Flower",
     url: "/dashboard/create-flower",
     icon: PiFlowerBold,
+    role: Role.ADMIN || Role.MANAGER,
+  },
+  {
+    title: "Delete Flower",
+    url: "/dashboard/delete-flower",
+    icon: RiDeleteBin6Line,
     role: Role.ADMIN || Role.MANAGER,
   },
 ];
