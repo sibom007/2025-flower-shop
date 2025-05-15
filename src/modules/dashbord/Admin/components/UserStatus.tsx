@@ -9,13 +9,13 @@ import {
 } from "@/components/ui/table";
 import { useGetUsers } from "../hooks/useGetUsers";
 import UserStatusForm from "./UserStatusForm";
+import { useAuth } from "@/context/AuthContext";
 
 function UserStatus() {
+  const { user } = useAuth();
+
   const { data } = useGetUsers();
-  console.log(
-    "🚀 ~ UserStatus ~ data:",
-    data?.map((user) => user.name)
-  );
+  const Existuser = data?.filter((data) => data.id !== user?.id);
 
   return (
     <div className="w-full  p-4">
@@ -24,19 +24,25 @@ function UserStatus() {
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>
+            <TableHead>Role</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Method</TableHead>
             <TableHead className="text-center">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data?.map((user) => (
+          {Existuser?.map((user) => (
             <TableRow key={user.id}>
               <TableCell className="font-medium">{user.name}</TableCell>
-              <TableCell>{user.status}</TableCell>
+              <TableCell className="lowercase">{user.role}</TableCell>
+              <TableCell className="lowercase">{user.status}</TableCell>
               <TableCell>{user.email}</TableCell>
               <TableCell className="flex justify-end">
-                <UserStatusForm />
+                <UserStatusForm
+                  id={user.id}
+                  Role={user.role}
+                  Status={user.status}
+                />
               </TableCell>
             </TableRow>
           ))}

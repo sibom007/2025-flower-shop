@@ -16,3 +16,7 @@ export const LoginUser = [
     password: "123456789",
   },
 ];
+
+export const UserRole = ["USER", "MANAGER", "ADMIN", "EMPLOY", "DISTRIBUTOR"];
+
+export const UserStatus = ["ACTIVE", "BLOCKED"];

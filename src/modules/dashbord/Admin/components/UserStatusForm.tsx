@@ -5,28 +5,62 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { UserRole, UserStatus } from "@/modules/auth/AuthConstant";
+import { useUpdateStatus } from "../hooks/useUpdateStatus";
+import { useUpdateRole } from "../hooks/useUpdateRole";
+import Loader from "@/components/loading/Loader";
 
-function UserStatusForm() {
+function UserStatusForm({
+  id,
+  Role,
+  Status,
+}: {
+  id: string;
+  Role: string;
+  Status: string;
+}) {
+  const { mutate: statusMutate, isPending: statusPending } = useUpdateStatus();
+  const { mutate: roleMutate, isPending: rolePending } = useUpdateRole();
+
+  const handleStatusChange = (value: string) => {
+    statusMutate({ id, status: value });
+  };
+
+  const handleRoleChange = (value: string) => {
+    roleMutate({ id, role: value });
+  };
+
   return (
     <div className="flex items-center gap-2 ">
-      <Select>
+      {rolePending && statusPending && <Loader />}
+      <Select
+        onValueChange={handleStatusChange}
+        defaultValue={Status}
+        disabled={rolePending || statusPending}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Status" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="light">Light</SelectItem>
-          <SelectItem value="dark">Dark</SelectItem>
-          <SelectItem value="system">System</SelectItem>
+          {UserStatus.map((Status, i) => (
+            <SelectItem key={i} value={Status}>
+              {Status}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
-      <Select>
+      <Select
+        defaultValue={Role}
+        onValueChange={handleRoleChange}
+        disabled={statusPending || rolePending}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="User Role" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="light">Light</SelectItem>
-          <SelectItem value="dark">Dark</SelectItem>
-          <SelectItem value="system">System</SelectItem>
+          {UserRole.map((Ro, i) => (
+            <SelectItem key={i} value={Ro}>
+              {Ro}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
     </div>
