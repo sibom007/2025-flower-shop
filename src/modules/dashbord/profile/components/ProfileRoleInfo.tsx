@@ -114,6 +114,18 @@ export default function ProfileRoleInfo({
             </div>
           )}
         </div>
+        {activeImage && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div
+              className="absolute inset-0 bg-black opacity-50"
+              onClick={() => setActiveImage(null)}></div>
+            <img
+              src={activeImage}
+              alt="Full-size"
+              className="max-w-full max-h-full"
+            />
+          </div>
+        )}
       </CardContent>
     </Card>
   );
