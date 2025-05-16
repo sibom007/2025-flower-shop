@@ -37,3 +37,16 @@ export interface IFlower {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface IFlowerFilter {
+  page?: number;
+  limit?: number;
+  selectedRating?: string | null;
+  minPrice?: string | null;
+  maxPrice?: string | null;
+  searchInput?: string | null;
+  selectedColor?: string | null;
+  selectedSort?: string | null;
+  selectedType?: string | null;
+  selectedCategory?: string | null;
+}
