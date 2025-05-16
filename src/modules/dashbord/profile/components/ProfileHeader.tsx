@@ -107,10 +107,10 @@ export default function ProfileHeader({ user, isLoading }: ProfileHeaderProps) {
           </div>
 
           {/* Email */}
-          <p className="text-white/80 flex items-center justify-center md:justify-start gap-2">
+          <div className="text-white/80 flex items-center justify-center md:justify-start gap-2">
             <Mail className="h-4 w-4" />
             {isLoading ? <Skeleton className="h-4 w-40" /> : user?.email}
-          </p>
+          </div>
 
           {/* Membership & Points */}
           <div className="flex flex-wrap justify-center md:justify-start gap-2">

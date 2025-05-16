@@ -13,6 +13,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Edit } from "lucide-react";
 import { IUser } from "@/Types/User.types";
+import { useContactUpdate } from "../hooks/useContactUpdate";
+import { useState } from "react";
 
 const contactSchema = z.object({
   phoneNumber: z
@@ -26,6 +28,8 @@ const contactSchema = z.object({
 type ContactFormData = z.infer<typeof contactSchema>;
 
 export default function ContactInfoForm({ user }: { user: IUser }) {
+  const { updateContact, isLoading } = useContactUpdate();
+  const [open, setOpen] = useState(false);
   const {
     register,
     handleSubmit,
@@ -40,12 +44,15 @@ export default function ContactInfoForm({ user }: { user: IUser }) {
   });
 
   const onSubmit = (data: ContactFormData) => {
-    console.log("Updated contact info:", data);
-    // TODO: send data to your backend or API
+    updateContact(data, {
+      onSuccess: () => {
+        setOpen(false);
+      },
+    });
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" className="hover:scale-105">
           <Edit className="h-4 w-4" />
@@ -99,6 +106,7 @@ export default function ContactInfoForm({ user }: { user: IUser }) {
 
           <Button
             type="submit"
+            disabled={isLoading}
             className="w-full bg-orangeTheme-600 text-white hover:bg-orangeTheme-700">
             Save Changes
           </Button>

@@ -15,6 +15,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Edit } from "lucide-react";
 import { IUser } from "@/Types/User.types";
+import { uploadToCloudinary } from "@/modules/shared/utils/uploadToCloudinary";
+import { useHeaderImgUpdate } from "../hooks/useHeaderImgUpdate";
 
 // Schema
 const profileSchema = z.object({
@@ -24,7 +26,9 @@ const profileSchema = z.object({
 type ProfileFormData = z.infer<typeof profileSchema>;
 
 export default function HeaderForm({ user }: { user: IUser }) {
+  const { updateHeaderImg, isLoading } = useHeaderImgUpdate();
   const [uploadingFront, setUploadingFront] = useState(0);
+  const [open, setOpen] = useState(false);
 
   const {
     control,
@@ -38,34 +42,16 @@ export default function HeaderForm({ user }: { user: IUser }) {
   });
 
   const onSubmit = (data: ProfileFormData) => {
-    console.log("Profile image updated:", data);
-    // TODO: Submit to API
-  };
-
-  const uploadToCloudinary = async (file: File): Promise<string | null> => {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "your_upload_preset"); // replace with your actual preset
-
-    try {
-      const res = await fetch(
-        "https://api.cloudinary.com/v1_1/your_cloud_name/image/upload",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-
-      const data = await res.json();
-      return data.secure_url;
-    } catch (err) {
-      console.error("Image upload failed:", err);
-      return null;
-    }
+    const image = data.profileImage ?? "";
+    updateHeaderImg(image, {
+      onSuccess: () => {
+        setOpen(false);
+      },
+    });
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
           size="sm"
@@ -90,6 +76,7 @@ export default function HeaderForm({ user }: { user: IUser }) {
               render={({ field }) => (
                 <>
                   <Input
+                    disabled={uploadingFront > 0 || isLoading}
                     type="file"
                     accept="image/*"
                     onChange={async (e) => {
@@ -126,6 +113,7 @@ export default function HeaderForm({ user }: { user: IUser }) {
 
           <Button
             type="submit"
+            disabled={isLoading}
             className="w-full bg-orangeTheme-600 text-white hover:bg-orangeTheme-700">
             Save Image
           </Button>

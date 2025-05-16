@@ -16,20 +16,23 @@ import { Edit } from "lucide-react";
 import { useState } from "react";
 import { IUser } from "@/Types/User.types";
 import { uploadToCloudinary } from "@/modules/shared/utils/uploadToCloudinary";
+import { useRoleInfoUpdate } from "../hooks/useRoleInfoUpdate";
 
 const profileSchema = z.object({
-  FatherName: z.string().optional(),
-  FatherNumber: z.string().optional(),
-  NIDNumber: z.string().optional(),
-  NIDFront: z.string().optional(),
-  NIDBack: z.string().optional(),
+  FatherName: z.string().nullable().optional(),
+  FatherNumber: z.string().nullable().optional(),
+  NIDNumber: z.string().nullable().optional(),
+  NIDFront: z.string().nullable().optional(),
+  NIDBack: z.string().nullable().optional(),
 });
 
 type RoleInfoFormData = z.infer<typeof profileSchema>;
 
 export default function RoleInfoForm({ user }: { user: IUser }) {
+  const { updateRoleInfo, isLoading } = useRoleInfoUpdate();
   const [uploadingFront, setUploadingFront] = useState(0);
   const [uploadingBack, setUploadingBack] = useState(0);
+  const [open, setOpen] = useState(false);
 
   const {
     register,
@@ -48,12 +51,22 @@ export default function RoleInfoForm({ user }: { user: IUser }) {
   });
 
   const onSubmit = (data: RoleInfoFormData) => {
-    console.log("Updated profile data:", data);
-    // TODO: Handle API submission
+    const safeData = {
+      FatherName: data.FatherName ?? "",
+      FatherNumber: data.FatherNumber ?? "",
+      NIDNumber: data.NIDNumber ?? "",
+      NIDFront: data.NIDFront ?? "",
+      NIDBack: data.NIDBack ?? "",
+    };
+    updateRoleInfo(safeData, {
+      onSuccess: () => {
+        setOpen(false);
+      },
+    });
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" className="hover:scale-105">
           <Edit className="h-4 w-4" />
@@ -176,6 +189,7 @@ export default function RoleInfoForm({ user }: { user: IUser }) {
           </div>
           <Button
             type="submit"
+            disabled={isLoading}
             className="w-full bg-orangeTheme-600 text-white hover:bg-orangeTheme-700">
             Save Changes
           </Button>
