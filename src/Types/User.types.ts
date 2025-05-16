@@ -1,70 +1,6 @@
-import { IFlower } from "@/Types/Flower.type";
-import {
-  IDistributorPayment,
-  IUserPayment,
-  PaymentType,
-} from "@/Types/Payment.types";
-
-export interface IUser {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-  image?: string;
-  number: string;
-  currentAddress: string;
-  homeAddress?: string;
-  role: UserRole;
-  status: UserStatus;
-  createdAt: string;
-  updatedAt: string;
-
-  adminProfile?: IAdminProfile;
-  managerProfile?: IManagerProfile;
-  employProfile?: IEmployProfile;
-  distributorProfile?: IDistributorProfile;
-
-  buyRecord: string[];
-  point: number;
-  membership: MembershipTier;
-  Flower: IFlower[];
-
-  DistributorPayment: IDistributorPayment[];
-  userPayment: IUserPayment[];
-}
-
-export interface IAdminProfile {
-  id: string;
-  userId: string;
-  nidCardImage: string;
-  fatherName: string;
-  fatherNumber: string;
-}
-
-export interface IManagerProfile {
-  id: string;
-  userId: string;
-  nidCardImage: string;
-  cvImage?: string;
-}
-
-export interface IEmployProfile {
-  id: string;
-  userId: string;
-  cvImage: string;
-  employType: EmployType;
-  rank: string;
-  paymentType: PaymentType;
-  paymentInfo: string[];
-}
-
-export interface IDistributorProfile {
-  id: string;
-  userId: string;
-  payRecord: string[];
-  pendingPayment: string[];
-  successfulPayment: string[];
-}
+import { IFlower } from "./Flower.type";
+import { IOrder } from "./Orders.types";
+import { IPayment } from "./Payment.types";
 
 export enum UserRole {
   USER = "USER",
@@ -79,16 +15,36 @@ export enum UserStatus {
   BLOCKED = "BLOCKED",
 }
 
-export enum EmployType {
-  INTERN = "INTERN",
-  PERMANENT = "PERMANENT",
-  SENIOR = "SENIOR",
-}
-
-export enum MembershipTier {
+export enum Membership {
   SILVER = "SILVER",
   GOLD = "GOLD",
   DIAMOND = "DIAMOND",
   PLATINUM = "PLATINUM",
   TITANIUM = "TITANIUM",
+}
+
+export interface IUser {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  image?: string;
+  number: string;
+  currentAddress: string;
+  homeAddress?: string;
+  FatherName?: string;
+  FatherNumber?: string;
+  NIDNumber?: string;
+  NIDFront?: string;
+  NIDBack?: string;
+  role: UserRole;
+  status: UserStatus;
+  createdAt: string;
+  updatedAt: string;
+  point: number;
+  membership: Membership;
+  buyRecord: string[];
+  Flower: IFlower[];
+  orders: IOrder[];
+  payments: IPayment[];
 }

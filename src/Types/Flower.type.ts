@@ -1,23 +1,3 @@
-export interface IFlower {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
-  description: string;
-  color: string;
-  category: FlowerCategory;
-  FlowerType: FlowerType;
-  stock: number;
-  discount?: number;
-  isAvailable: boolean;
-  rating?: number;
-  likes?: number;
-  commments: string[];
-  createdById?: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
 export enum FlowerCategory {
   HAPPY_MOMENTS = "HAPPY_MOMENTS",
   LOVE_AND_ROMANCE = "LOVE_AND_ROMANCE",
@@ -38,15 +18,22 @@ export enum FlowerType {
   LIMITED = "LIMITED",
 }
 
-export interface IFlowerFilter {
-  page?: number;
-  limit?: number;
-  selectedRating?: string | null;
-  minPrice?: string | null;
-  maxPrice?: string | null;
-  searchInput?: string | null;
-  selectedColor?: string | null;
-  selectedSort?: string | null;
-  selectedType?: string | null;
-  selectedCategory?: string | null;
+export interface IFlower {
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+  description: string;
+  color: string;
+  category: FlowerCategory;
+  FlowerType: FlowerType;
+  stock: number;
+  discount?: number;
+  isAvailable: boolean;
+  rating?: number;
+  likes?: number;
+  commments: string[];
+  createdById?: string;
+  createdAt: string;
+  updatedAt: string;
 }

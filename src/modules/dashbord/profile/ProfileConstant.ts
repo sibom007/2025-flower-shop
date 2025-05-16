@@ -1,4 +1,4 @@
-import { MembershipTier, UserRole, UserStatus } from "@/Types/User.types";
+import { Membership, UserRole, UserStatus } from "@/Types/User.types";
 
 export const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleDateString("en-US", {
@@ -8,17 +8,17 @@ export const formatDate = (dateString: string) => {
   });
 };
 
-export const getMembershipColor = (tier: MembershipTier) => {
+export const getMembershipColor = (tier: Membership) => {
   switch (tier) {
-    case MembershipTier.SILVER:
+    case Membership.SILVER:
       return "bg-gray-300 text-gray-800";
-    case MembershipTier.GOLD:
+    case Membership.GOLD:
       return "bg-amber-300 text-amber-800";
-    case MembershipTier.DIAMOND:
+    case Membership.DIAMOND:
       return "bg-sky-300 text-sky-800";
-    case MembershipTier.PLATINUM:
+    case Membership.PLATINUM:
       return "bg-slate-300 text-slate-800";
-    case MembershipTier.TITANIUM:
+    case Membership.TITANIUM:
       return "bg-purple-300 text-purple-800";
     default:
       return "bg-gray-300 text-gray-800";
@@ -62,7 +62,7 @@ export const mockUser = {
   },
   buyRecord: ["order-001", "order-002", "order-003"],
   point: 1250,
-  membership: MembershipTier.GOLD,
+  membership: Membership.GOLD,
   Flower: [],
   DistributorPayment: [],
   userPayment: [

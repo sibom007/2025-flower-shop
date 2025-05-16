@@ -10,6 +10,7 @@ import { IUser } from "@/Types/User.types";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Separator } from "@/components/ui/separator";
 import { Edit, MapPin, Phone, User } from "lucide-react";
+import ContactInfoForm from "./ContactInfoForm";
 
 interface ProfileContactInfoProps {
   user: IUser | null;
@@ -45,10 +46,13 @@ export default function ProfileContactInfo({
   return (
     <Card className="transition-all duration-300 hover:shadow-md">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-[oklch(0.554_0.225_37.417)]">
-          <User className="h-5 w-5" />
-          Contact Information
-        </CardTitle>
+        <div className="flex items-center justify-between">
+          <CardTitle className="flex items-center gap-2 text-[oklch(0.554_0.225_37.417)]">
+            <User className="h-5 w-5" />
+            Contact Information
+          </CardTitle>
+          {user && <ContactInfoForm user={user} />}
+        </div>
         <Separator />
       </CardHeader>
       <CardContent className="space-y-2">

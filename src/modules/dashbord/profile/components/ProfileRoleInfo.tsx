@@ -5,18 +5,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useState } from "react";
-import AdminSection from "./AdminSection";
-import EmploySection from "./EmploySection";
-import { Badge, Shield } from "lucide-react";
-import ManagerSection from "./ManagerSection";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  formatDate,
-  getRoleColor,
-} from "@/modules/dashbord/profile/ProfileConstant";
-import { UserRole, IUser } from "@/Types/User.types";
-import DistributorSection from "./DistributorSection";
+import { ShieldAlert } from "lucide-react";
+import { useState } from "react";
+import { IUser, UserRole } from "@/Types/User.types";
+import RoleInfoForm from "./RoleInfoForm";
 
 interface ProfileRoleInfoProps {
   user: IUser | null;
@@ -31,13 +24,9 @@ export default function ProfileRoleInfo({
 }: ProfileRoleInfoProps) {
   const [activeImage, setActiveImage] = useState<string | null>(null);
 
-  const toggleImageView = (imageUrl: string) => {
-    setActiveImage((prev) => (prev === imageUrl ? null : imageUrl));
-  };
-
   if (isLoading) {
     return (
-      <Card className="md:col-span-2 transition-all duration-300 hover:shadow-md">
+      <Card className="md:col-span-2">
         <CardHeader>
           <Skeleton className="h-6 w-1/3" />
           <Skeleton className="h-4 w-1/2 mt-2" />
@@ -55,7 +44,7 @@ export default function ProfileRoleInfo({
       <Card className="md:col-span-2">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-destructive">
-            <Shield className="h-5 w-5" />
+            <ShieldAlert className="h-5 w-5" />
             Error
           </CardTitle>
           <CardDescription>
@@ -67,66 +56,94 @@ export default function ProfileRoleInfo({
   }
 
   return (
-    <Card className="md:col-span-2 transition-all duration-300 hover:shadow-md">
+    <Card className="md:col-span-2 hover:shadow-md transition-all">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-[oklch(0.554_0.225_37.417)]">
-          <Shield className="h-5 w-5" />
-          Role Information
-        </CardTitle>
-        <CardDescription>
-          Details specific to your {user.role.toLowerCase()} role at Flower
-          Bloom
-        </CardDescription>
+        <div className="flex items-center justify-between">
+          <CardTitle className="flex items-center gap-2 text-primary">
+            <ShieldAlert className="h-5 w-5" />
+            Role Information
+          </CardTitle>
+          <RoleInfoForm user={user} />
+        </div>
       </CardHeader>
 
       <CardContent>
         <div className="space-y-6">
-          <div className="flex items-center gap-3">
-            <Badge className={getRoleColor(user.role)}>{user.role}</Badge>
-            <span className="text-sm text-muted-foreground">
-              Since {formatDate(user.createdAt)}
-            </span>
-          </div>
-
-          {/* Role-specific Sections */}
-          {user.role === UserRole.MANAGER && user.managerProfile && (
-            <ManagerSection user={user} toggleImageView={toggleImageView} />
-          )}
-
-          {user.role === UserRole.ADMIN && user.adminProfile && (
-            <AdminSection user={user} toggleImageView={toggleImageView} />
-          )}
-
-          {user.role === UserRole.EMPLOY && user.employProfile && (
-            <EmploySection user={user} toggleImageView={toggleImageView} />
-          )}
-
-          {user.role === UserRole.DISTRIBUTOR && user.distributorProfile && (
-            <DistributorSection user={user} />
-          )}
-
           {user.role === UserRole.USER && (
-            <div className="flex items-center justify-center p-4">
-              <div className="text-center">
-                <p className="text-muted-foreground">Standard user account</p>
-                <p className="mt-2">Enjoy shopping for beautiful flowers!</p>
-              </div>
+            <div className="text-center bg-muted/30 p-4 rounded-md">
+              <p className="text-muted-foreground">Standard user account</p>
+              <p className="mt-2">Enjoy shopping for beautiful flowers!</p>
             </div>
           )}
+
+          {/* Show fallback info cards for common fields */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <InfoBlock label="Father's Name" value={user.FatherName} />
+            <InfoBlock label="Father's Number" value={user.FatherNumber} />
+            <InfoBlock label="NID Number" value={user.NIDNumber} />
+            <ImagePreview
+              label="NID Front"
+              src={user.NIDFront}
+              onClick={setActiveImage}
+            />
+            <ImagePreview
+              label="NID Back"
+              src={user.NIDBack}
+              onClick={setActiveImage}
+            />
+          </div>
         </div>
+
         {activeImage && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
             <div
-              className="absolute inset-0 bg-black opacity-50"
-              onClick={() => setActiveImage(null)}></div>
+              className="absolute inset-0 bg-black bg-opacity-50"
+              onClick={() => setActiveImage(null)}
+            />
             <img
               src={activeImage}
-              alt="Full-size"
-              className="max-w-full max-h-full"
+              alt="Preview"
+              className="max-w-full max-h-full rounded-lg z-10"
             />
           </div>
         )}
       </CardContent>
     </Card>
+  );
+}
+
+function InfoBlock({ label, value }: { label: string; value?: string }) {
+  return (
+    <div className="bg-muted/30 p-3 rounded-md">
+      <p className="text-sm text-muted-foreground">{label}</p>
+      <p className="font-medium mt-1">
+        {value || <span className="text-muted">Not Provided</span>}
+      </p>
+    </div>
+  );
+}
+
+function ImagePreview({
+  label,
+  src,
+  onClick,
+}: {
+  label: string;
+  src?: string;
+  onClick: (url: string) => void;
+}) {
+  return (
+    <div className="bg-muted/30 p-3 rounded-md">
+      <p className="text-sm text-muted-foreground mb-2">{label}</p>
+      <div
+        className="border rounded-md overflow-hidden cursor-pointer transition-all hover:opacity-90"
+        onClick={() => src && onClick(src)}>
+        <img
+          src={src || "/placeholder.svg"}
+          alt={label}
+          className="w-full h-auto object-cover"
+        />
+      </div>
+    </div>
   );
 }

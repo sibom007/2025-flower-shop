@@ -1,27 +1,7 @@
-export interface IDistributorPayment {
-  id: string;
-  FlowerName: string;
-  stock: number;
-  price: number;
-  totalPrice: number;
-  number: string;
-  paymentType: PaymentType;
-  paymentStatus: PaymentStatus;
-  userId: string;
-}
-
-export interface IUserPayment {
-  id: string;
-  FlowerName: string;
-  quantity: number;
-  price: number;
-  totalPrice: number;
-  number: string;
-  paymentImage: string;
-  discountCoupon: string;
-  paymentType: PaymentType;
-  paymentStatus: PaymentStatus;
-  userId: string;
+export enum PaymentType {
+  CASH_ON_DELIVERY = "CASH_ON_DELIVERY",
+  BKASH = "BKASH",
+  NAGAD = "NAGAD",
 }
 
 export enum PaymentStatus {
@@ -30,8 +10,14 @@ export enum PaymentStatus {
   FAILED = "FAILED",
 }
 
-export enum PaymentType {
-  BANK = "BANK",
-  NAGOD = "NAGOD",
-  BKASH = "BKASH",
+export interface IPayment {
+  id: string;
+  amount: number;
+  paymentId: string;
+  status: PaymentStatus;
+  PaymentType: PaymentType;
+  paymentDate: string;
+  createdAt: string;
+  updatedAt: string;
+  userId: string;
 }

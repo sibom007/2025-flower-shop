@@ -5,15 +5,16 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+
 import {
   getMembershipColor,
   getRoleColor,
 } from "@/modules/dashbord/profile/ProfileConstant";
 import { Skeleton } from "@/components/ui/skeleton";
 import { IUser, UserStatus } from "@/Types/User.types";
-import { Award, Edit, Mail, Package } from "lucide-react";
+import { Award, Mail, Package } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import HeaderForm from "./HeaderForm";
 
 type ProfileHeaderProps = {
   user: IUser;
@@ -47,12 +48,7 @@ export default function ProfileHeader({ user, isLoading }: ProfileHeaderProps) {
                 </AvatarFallback>
               </Avatar>
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  className="rounded-full w-8 h-8 p-0">
-                  <Edit className="h-4 w-4" />
-                </Button>
+                <HeaderForm user={user} />
               </div>
             </div>
           )}
@@ -142,18 +138,6 @@ export default function ProfileHeader({ user, isLoading }: ProfileHeaderProps) {
             )}
           </div>
         </div>
-
-        {/* Edit Button */}
-        {isLoading ? (
-          <Skeleton className="h-10 w-36 rounded-md" />
-        ) : (
-          <Button
-            variant="outline"
-            className="bg-white/20 text-white hover:bg-white/30 transition-all duration-300 hover:scale-105">
-            <Edit className="h-4 w-4 mr-2" />
-            Edit Profile
-          </Button>
-        )}
       </div>
     </div>
   );

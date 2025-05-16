@@ -14,7 +14,7 @@ import {
 } from "@/modules/dashbord/profile/ProfileConstant";
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
-import { IUser, MembershipTier } from "@/Types/User.types";
+import { IUser, Membership } from "@/Types/User.types";
 import { Award, Clock, CreditCard, Package } from "lucide-react";
 
 interface ProfileMembershipProps {
@@ -28,22 +28,22 @@ export default function ProfileMembership({
   isLoading,
   error,
 }: ProfileMembershipProps) {
-  const getMembershipProgress = (tier: MembershipTier, points: number) => {
+  const getMembershipProgress = (tier: Membership, points: number) => {
     const tiers = {
-      [MembershipTier.SILVER]: { min: 0, max: 1000 },
-      [MembershipTier.GOLD]: { min: 1000, max: 2500 },
-      [MembershipTier.DIAMOND]: { min: 2500, max: 5000 },
-      [MembershipTier.PLATINUM]: { min: 5000, max: 10000 },
-      [MembershipTier.TITANIUM]: { min: 10000, max: 10000 },
+      [Membership.SILVER]: { min: 0, max: 1000 },
+      [Membership.GOLD]: { min: 1000, max: 2500 },
+      [Membership.DIAMOND]: { min: 2500, max: 5000 },
+      [Membership.PLATINUM]: { min: 5000, max: 10000 },
+      [Membership.TITANIUM]: { min: 10000, max: 10000 },
     };
 
     const currentTier = tiers[tier];
     const nextTier =
-      tier === MembershipTier.TITANIUM
+      tier === Membership.TITANIUM
         ? null
         : tiers[
-            Object.values(MembershipTier)[
-              Object.values(MembershipTier).indexOf(tier) + 1
+            Object.values(Membership)[
+              Object.values(Membership).indexOf(tier) + 1
             ]
           ];
 
@@ -53,22 +53,22 @@ export default function ProfileMembership({
     return Math.min(Math.max(progress, 0), 100);
   };
 
-  const getNextTier = (tier: MembershipTier) => {
-    const tiers = Object.values(MembershipTier);
+  const getNextTier = (tier: Membership) => {
+    const tiers = Object.values(Membership);
     const currentIndex = tiers.indexOf(tier);
     return currentIndex < tiers.length - 1 ? tiers[currentIndex + 1] : null;
   };
 
-  const getPointsToNextTier = (tier: MembershipTier, points: number) => {
+  const getPointsToNextTier = (tier: Membership, points: number) => {
     const nextTier = getNextTier(tier);
     if (!nextTier) return 0;
 
     const tierThresholds = {
-      [MembershipTier.SILVER]: 0,
-      [MembershipTier.GOLD]: 1000,
-      [MembershipTier.DIAMOND]: 2500,
-      [MembershipTier.PLATINUM]: 5000,
-      [MembershipTier.TITANIUM]: 10000,
+      [Membership.SILVER]: 0,
+      [Membership.GOLD]: 1000,
+      [Membership.DIAMOND]: 2500,
+      [Membership.PLATINUM]: 5000,
+      [Membership.TITANIUM]: 10000,
     };
 
     return tierThresholds[nextTier] - points;
