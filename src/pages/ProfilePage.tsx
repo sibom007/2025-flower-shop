@@ -13,12 +13,11 @@ export default function ProfilePage() {
       <div>
         <ProfileHeader user={user} isLoading={isLoading} />
       </div>
-
       {/* Two-column layout: Contact Info & Role Info */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-fit">
         <ProfileContactInfo user={user} isLoading={isLoading} />
         <ProfileRoleInfo user={user} isLoading={isLoading} />
-      </div>
+      </div>{" "}
       <div>
         <ProfileMembership user={user} isLoading={isLoading} />
       </div>

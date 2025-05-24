@@ -2,7 +2,7 @@ import { Settings } from "lucide-react";
 import { FaUserSlash } from "react-icons/fa";
 import { PiFlowerBold } from "react-icons/pi";
 import { RiProfileLine } from "react-icons/ri";
-import { MdPendingActions, MdOutlinePayments } from "react-icons/md";
+import { MdPendingActions, MdOutlinePayments, MdAddCard } from "react-icons/md";
 import { LuBriefcase } from "react-icons/lu";
 
 import {
@@ -24,12 +24,17 @@ import { UserRole } from "@/Types/User.types";
 // Menu items.
 const Useritems = [
   {
+    title: "Cards",
+    url: "/dashboard/cards",
+    icon: MdAddCard,
+  },
+  {
     title: "Profile",
     url: "/dashboard/profile",
     icon: RiProfileLine,
   },
   {
-    title: "Ordera",
+    title: "Order",
     url: "/dashboard/orders",
     icon: LuBriefcase,
   },

@@ -13,7 +13,7 @@ export const useDeleteFlower = () => {
 
     onSuccess: (data) => {
       toast.success(data.message);
-      quryClient.invalidateQueries({ queryKey: ["flower"] });
+      quryClient.invalidateQueries({ queryKey: ["flowers"] });
     },
     onError: (error) => {
       toast.error(error.message);

@@ -80,7 +80,6 @@ export default function ProfileRoleInfo({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <InfoBlock label="Father's Name" value={user.FatherName} />
             <InfoBlock label="Father's Number" value={user.FatherNumber} />
-            <InfoBlock label="NID Number" value={user.NIDNumber} />
             <ImagePreview
               label="NID Front"
               src={user.NIDFront}
@@ -91,6 +90,7 @@ export default function ProfileRoleInfo({
               src={user.NIDBack}
               onClick={setActiveImage}
             />
+            <InfoBlock label="NID Number" value={user.NIDNumber} />
           </div>
         </div>
 
@@ -114,7 +114,7 @@ export default function ProfileRoleInfo({
 
 function InfoBlock({ label, value }: { label: string; value?: string }) {
   return (
-    <div className="bg-muted/30 p-3 rounded-md">
+    <div className="bg-muted p-3 rounded-md">
       <p className="text-sm text-muted-foreground">{label}</p>
       <p className="font-medium mt-1">
         {value || <span className="text-muted">Not Provided</span>}
@@ -133,7 +133,7 @@ function ImagePreview({
   onClick: (url: string) => void;
 }) {
   return (
-    <div className="bg-muted/30 p-3 rounded-md">
+    <div className="bg-muted p-3 rounded-md">
       <p className="text-sm text-muted-foreground mb-2">{label}</p>
       <div
         className="border rounded-md overflow-hidden cursor-pointer transition-all hover:opacity-90"
@@ -141,7 +141,7 @@ function ImagePreview({
         <img
           src={src || "/placeholder.svg"}
           alt={label}
-          className="w-full h-auto object-cover"
+          className="w-full h-52 object-cover"
         />
       </div>
     </div>

@@ -25,6 +25,14 @@ const buttonVariants = cva(
           "flex-shrink-0 px-5 py-2 bg-orangeTheme-500 text-white font-semibold rounded-full hover:bg-orangeTheme-600 transition-all duration-300",
         filter:
           "bg-orangeTheme-100 text-black   text-shadow-lg hover:bg-orangeTheme-400 duration-300",
+        trash: `
+    relative w-[50px] h-[50px] p-0 rounded-full bg-orangeTheme-100
+    hover:w-[140px] hover:rounded-[50px] hover:bg-orangeTheme-500
+    flex flex-col items-center justify-center gap-[1px]
+    shadow-[0_0_20px_rgba(0,0,0,0.164)]
+    transition-all duration-300 ease-in-out overflow-hidden
+    text-white font-semibold cursor-pointer
+  `,
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

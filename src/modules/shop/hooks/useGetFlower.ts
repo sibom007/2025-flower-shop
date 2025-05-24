@@ -9,7 +9,7 @@ export const useGetFlower = (payload: IFlowerFilter | null) => {
   );
 
   return useQuery({
-    queryKey: ["flower", cleanedFilters],
+    queryKey: ["flowers", cleanedFilters],
     queryFn: async () => {
       const response = await axiosInstance.get(`/f/all-flowers`, {
         params: cleanedFilters,

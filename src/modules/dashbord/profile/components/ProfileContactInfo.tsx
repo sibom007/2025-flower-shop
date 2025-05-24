@@ -1,15 +1,8 @@
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { IUser } from "@/Types/User.types";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Separator } from "@/components/ui/separator";
-import { Edit, MapPin, Phone, User } from "lucide-react";
+import { MapPin, Phone, User } from "lucide-react";
 import ContactInfoForm from "./ContactInfoForm";
 
 interface ProfileContactInfoProps {
@@ -44,7 +37,7 @@ export default function ProfileContactInfo({
   );
 
   return (
-    <Card className="transition-all duration-300 hover:shadow-md">
+    <Card className="transition-all duration-300 hover:shadow-md ">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2 text-[oklch(0.554_0.225_37.417)]">
@@ -72,17 +65,6 @@ export default function ProfileContactInfo({
           <MapPin className="h-5 w-5" />
         )}
       </CardContent>
-
-      <CardFooter>
-        {isLoading ? (
-          <Skeleton className="h-10 w-full rounded-md" />
-        ) : (
-          <Button variant="outline" size="sm" className="w-full">
-            <Edit className="h-4 w-4 mr-2" />
-            Update Contact Info
-          </Button>
-        )}
-      </CardFooter>
     </Card>
   );
 }

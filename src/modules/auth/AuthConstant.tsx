@@ -11,6 +11,11 @@ export const LoginUser = [
     password: "123456789",
   },
   {
+    name: "user",
+    email: "user@gmail.com",
+    password: "123456789",
+  },
+  {
     name: "distributor",
     email: "distributor@gmail.com",
     password: "123456789",

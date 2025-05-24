@@ -28,7 +28,7 @@ export const useUpdateFlower = () => {
       return res.data;
     },
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ["flower"] });
+      queryClient.invalidateQueries({ queryKey: ["flowers"] });
       toast.success(data.message);
     },
     onError: (error) => {

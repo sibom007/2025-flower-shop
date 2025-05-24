@@ -63,6 +63,31 @@ export const flowerFilterColors = [
     name: "Teal",
   },
 ];
+
+export const flowerColorMap: Record<string, string> = {
+  Green: "#4CAF50",
+  Yellow: "#FFEB3B",
+  Red: "#F44336",
+  Blue: "#2196F3",
+  Violet: "#8A2BE2",
+  Rose: "#FF007F",
+  Pink: "#E91E63",
+  Orange: "#FF9800",
+  Purple: "#9C27B0",
+  White: "#FFFFFF",
+  Black: "#000000",
+  Brown: "#795548",
+  Gray: "#9E9E9E",
+  Cream: "#FFFDD0",
+  Lavender: "#E6E6FA",
+  Coral: "#FF7F50",
+  Peach: "#FFDAB9",
+  Lime: "#CDDC39",
+  Mint: "#98FF98",
+  Teal: "#009688",
+};
+
+
 export const flowerTypes = [
   {
     name: "Limited Edition",

@@ -18,6 +18,7 @@ import { UserRole } from "@/Types/User.types";
 import ProfilePage from "@/pages/ProfilePage";
 import PaymentPage from "@/pages/PaymentPage";
 import OrdersPage from "@/pages/OrdersPage";
+import CardPage from "@/pages/CardPage";
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "/dashboard/cards",
+        element: <CardPage />,
       },
       {
         path: "/dashboard/profile",
